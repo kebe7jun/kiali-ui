@@ -1,17 +1,14 @@
-FROM node:10-stretch-slim
-
-COPY package.json /tmp/package.json
-COPY yarn.lock /tmp/yarn.lock
-
-WORKDIR /tmp
-
-RUN yarn install --frozen-lockfile \
-    && mv /tmp/node_modules /root/
+FROM node:11.10.1
 
 WORKDIR /root
 
+COPY package.json /root/package.json
+COPY yarn.lock /root/yarn.lock
+
+RUN yarn install --frozen-lockfile
+
 COPY . /root
 
-RUN KIALI_ENV=production yarn build
+RUN yarn build:prod
 
-RUN cd dist && sed -i 's/<base href=\"\/\"\/>//g' index.html && mv index.html index-kiali.html
+RUN cd build && sed -i 's/<base href=\"\/\"\/>//g' index.html && mv index.html index-kiali.html
