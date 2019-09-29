@@ -1,4 +1,4 @@
-FROM node:11.10.1
+FROM node:10-stretch-slim
 
 WORKDIR /root
 
