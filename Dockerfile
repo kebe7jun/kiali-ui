@@ -12,6 +12,6 @@ WORKDIR /root
 
 COPY . /root
 
-RUN yarn build
+RUN KIALI_ENV=production yarn build
 
 RUN cd dist && sed -i 's/<base href=\"\/\"\/>//g' index.html && mv index.html index-kiali.html
