@@ -1,9 +1,9 @@
-import { createBrowserHistory, createMemoryHistory } from 'history';
+import { createHashHistory, createMemoryHistory } from 'history';
 import { toValidDuration } from '../config/ServerConfig';
 
 const webRoot = (window as any).WEB_ROOT ? (window as any).WEB_ROOT : undefined;
 const baseName = webRoot && webRoot !== '/' ? webRoot + '/console' : '/console';
-const history = process.env.TEST_RUNNER ? createMemoryHistory() : createBrowserHistory({ basename: baseName });
+const history = process.env.TEST_RUNNER ? createMemoryHistory() : createHashHistory({ basename: baseName });
 
 export default history;
 
